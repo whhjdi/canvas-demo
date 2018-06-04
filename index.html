@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body oncontextmenu="return false" onselectstart="return false">
+    <canvas id="myCanvas"></canvas>
+    <div class="actions" id="actions">
+        <div class="options" id='options'>选项</div>
+        <div class="wrapper" id="wrapper">
+            <input type="color" class="bgColor" id="bgColor" value="#dddddd">
+            <button class="bgBtn" id="bgBtn">画布背景</button>
+
+            <input type="color" class="brushColor" id='brushColor' value="#e66666">
+            <button class="brushColorBtn" id="brushColorBtn">笔刷颜色</button>
+
+            <div class="chooseBrush" id='chooseBrush'>笔刷</div>
+            <div class="brushWrapper" id="brushWrapper">
+                <div class="pencil" id="pencil">铅笔</div>
+                <div class="pen" id="pen">钢笔</div>
+                <div class="brush" id="brush">毛笔</div>
+            </div>
+            <div class="eraser" id='eraser'>橡皮</div>
+            <div class="clear" id='clear'>清除</div>
+            <div class="save" id='save'>保存</div>
+        </div>
+    </div>
+    
+    <script src="./main.js"></script>
+    <script src="//at.alicdn.com/t/font_626502_motodgyckkbxd2t9.js"></script>
+</body>
+
+</html>

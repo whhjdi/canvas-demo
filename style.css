@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    cursor: url("./imgs/pencil.png"), default;
+}
+.pencil{
+	cursor: url("./imgs/pencil.png"), default;
+}
+.pen{
+	cursor: url("./imgs/pen.png"), default;
+}
+.brush{
+	cursor: url("./imgs/brush.png"), default;
+}
+.eraser{
+	cursor: url("./imgs/eraser.png"), default;
+}
+.actions {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 200ms ease-in-out all;
+
+}
+.actions div {
+    width: 70px;
+    height: 45px;
+    line-height: 45px;
+    background: #000;
+    color: white;
+    margin:5px 0;
+    border-radius: 8px;
+}
+.wrapper{
+    display: none;
+}
+.wrapper.active{
+    display: block;
+    border-radius: 8px;
+}
+.bgColor{
+    display: none;
+}
+button{
+    width: 70px;
+    height: 45px;
+    line-height: 45px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+}
+.bgBtn{
+    margin: 0;
+}
+.brushColorBtn{
+    margin-top:5px;
+}
+.brushColor{
+    display: none;
+}
+.brushWrapper{
+    display: none;
+}
+.brushWrapper.active{
+    display: block;
+    position: fixed;
+    left:90px;
+    top:95px;
+    background: transparent;
+    border-radius: 8px;
+}
