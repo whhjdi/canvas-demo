@@ -13,7 +13,6 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-
 canvas {
     display: block;
     cursor: url("./imgs/pencil.png"), default;
@@ -30,49 +29,43 @@ canvas {
 .eraser{
 	cursor: url("./imgs/eraser.png"), default;
 }
+
 .actions {
     position: absolute;
-    top: 0;
+    top: 5px;
     left: 10px;
     text-align: center;
     cursor: pointer;
-    transition: 200ms ease-in-out all;
-
 }
 .actions div {
     width: 70px;
     height: 45px;
     line-height: 45px;
-    background: #000;
-    color: white;
+    background: #ddd;
+    color: #000;
     margin:5px 0;
-    border-radius: 8px;
-}
-.wrapper{
-    display: none;
-}
-.wrapper.active{
-    display: block;
-    border-radius: 8px;
-}
-.bgColor{
-    display: none;
+    border-radius: 10px;
 }
 button{
     width: 70px;
     height: 45px;
     line-height: 45px;
-    background: #000;
-    color: white;
+    background: #ddd;
+    color: #000;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     outline: none;
-}
-.bgBtn{
-    margin: 0;
+    cursor: pointer;
 }
 .brushColorBtn{
     margin-top:5px;
+}
+/* display */
+.wrapper{
+    display: none;
+}
+.bgColor{
+    display: none;
 }
 .brushColor{
     display: none;
@@ -80,11 +73,50 @@ button{
 .brushWrapper{
     display: none;
 }
+/* active */
+.wrapper.active{
+    display: block;
+    border-radius: 8px;
+    background: transparent;
+}
+.pencil.active{
+    background: #e66666;
+}
+.pen.active{
+    background: #e66666;
+}
+.brush.active{
+    background: #e66666;
+}
+.eraser.active{
+    background: #e66666;
+}
 .brushWrapper.active{
     display: block;
     position: fixed;
     left:90px;
-    top:95px;
+    top:145px;
     background: transparent;
     border-radius: 8px;
+}
+/*设置hover样式*/
+.options:hover{
+    background: #222;
+    color: azure;
+}
+.bgBtn:hover{
+    color:#fff;
+    background: #222;
+}
+.brushColorBtn:hover{
+    color:#fff;
+    background: #222; 
+}
+.clear:hover{
+    color:#fff;
+    background: #222; 
+}
+.save:hover{
+    color:#fff;
+    background: #222; 
 }
