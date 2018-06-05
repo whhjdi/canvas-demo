@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 ol,
 ul {
     list-style: none;
@@ -56,10 +55,15 @@ button{
     border-radius: 10px;
     outline: none;
     cursor: pointer;
+    margin-bottom: 5px;
+    float:left;
 }
-.brushColorBtn{
-    margin-top:5px;
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
 }
+
 /* display */
 .wrapper{
     display: none;
@@ -91,11 +95,15 @@ button{
 .eraser.active{
     background: #e66666;
 }
+.chooseBrush.active{
+    background: #111;
+    color: #fff;
+}
 .brushWrapper.active{
     display: block;
     position: fixed;
     left:90px;
-    top:145px;
+    top:100px;
     background: transparent;
     border-radius: 8px;
 }
@@ -105,6 +113,10 @@ button{
     color: azure;
 }
 .bgBtn:hover{
+    color:#fff;
+    background: #222;
+}
+.chooseBrush:hover{
     color:#fff;
     background: #222;
 }

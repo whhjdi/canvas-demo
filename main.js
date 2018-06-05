@@ -13,54 +13,61 @@ function listenOptions() {
     };
     bgColor.onchange = function () {
         c.style.background = this.value;
-    }
+    };
     brushColorBtn.onclick = function () {
         brushColor.click();
     };
-    eraser.onclick = function () {
-        eraserEnable = true
-        chooseBrush.innerText = "继续"
-        brushWrapper.classList.remove('active')
-        myCanvas.className = 'eraser'
-        eraser.classList.add('active')
-    }
     var usingbrush = false
     chooseBrush.onclick = function () {
-        eraserEnable = false
-        if (chooseBrush.innerText === "继续") {
-            chooseBrush.innerText = "笔刷"
-            eraser.classList.remove('active')
-        } else {
             usingbrush = !usingbrush
             if (usingbrush) {
-                chooseBrush.innerText = "笔刷"
                 brushWrapper.classList.add('active')
-            } else {
+                chooseBrush.classList.add('active')
+            }else{
                 brushWrapper.classList.remove('active')
+                chooseBrush.classList.remove('active')
             }
+    }
+    eraser.onclick = function () {
+        eraserEnable = !eraserEnable
+        if(eraserEnable){
+            myCanvas.setAttribute('class', 'eraser')
+            eraser.classList.add('active')
+            pencil.classList.remove('active')
+            pen.classList.remove('active')
+            brush.classList.remove('active')
         }
     }
     ctx.lineWidth = 2;
     pencil.onclick = function () {
+        eraserEnable = false
         ctx.lineWidth = 2;
-        myCanvas.className = 'pencil'
+        myCanvas.setAttribute('class', 'pencil')
+        var canvasClassName = myCanvas.getAttribute('class')
         pencil.classList.add('active')
         pen.classList.remove('active')
         brush.classList.remove('active')
+        eraser.classList.remove('active')
     }
     pen.onclick = function () {
+        eraserEnable = false
         ctx.lineWidth = 4;
-        myCanvas.className = 'pen'
+        myCanvas.setAttribute('class', 'pen')
+        var canvasClassName = myCanvas.getAttribute('class')
         pen.classList.add('active')
         pencil.classList.remove('active')
         brush.classList.remove('active')
+        eraser.classList.remove('active')
     }
     brush.onclick = function () {
+        eraserEnable = false
         ctx.lineWidth = 6;
-        myCanvas.className = 'brush'
+        myCanvas.setAttribute('class', 'brush')
+        var canvasClassName = myCanvas.getAttribute('class')
         brush.classList.add('active')
         pen.classList.remove('active')
         pencil.classList.remove('active')
+        eraser.classList.remove('active')
     }
 
     var optionItems = false
