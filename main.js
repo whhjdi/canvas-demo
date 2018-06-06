@@ -8,6 +8,31 @@ listenOptions()
 //监听按钮
 var eraserEnable = false
 function listenOptions() {
+    var optionsEnable = true
+    var node = options.parentNode.childNodes
+    for(var i = 2; i<node.length; i++){
+        if(node[i].nodeType === 1){
+            node[i].style.display = 'none'
+        }
+    }
+    options.onclick = function(){
+        optionsEnable = !optionsEnable
+        if(optionsEnable){
+            for(var i = 2; i<node.length; i++){
+                if(node[i].nodeType === 1){
+                    node[i].style.display = 'none'
+                    options.textContent = 'option'
+                }
+            }
+        }else{
+            for(var i = 2; i<node.length; i++){
+                if(node[i].nodeType === 1){
+                    node[i].style.display = 'block'
+                    options.textContent = 'hide'
+                }
+            }
+        } 
+    }
     bgBtn.onclick = function () {
         bgColor.click();
     };
@@ -17,33 +42,19 @@ function listenOptions() {
     brushColorBtn.onclick = function () {
         brushColor.click();
     };
-    var usingbrush = false
-    chooseBrush.onclick = function () {
-            usingbrush = !usingbrush
-            if (usingbrush) {
-                brushWrapper.classList.add('active')
-                chooseBrush.classList.add('active')
-            }else{
-                brushWrapper.classList.remove('active')
-                chooseBrush.classList.remove('active')
-            }
-    }
     eraser.onclick = function () {
-        eraserEnable = !eraserEnable
-        if(eraserEnable){
-            myCanvas.setAttribute('class', 'eraser')
-            eraser.classList.add('active')
-            pencil.classList.remove('active')
-            pen.classList.remove('active')
-            brush.classList.remove('active')
-        }
+        eraserEnable = true
+        myCanvas.setAttribute('class', 'eraser')
+        eraser.classList.add('active')
+        pencil.classList.remove('active')
+        pen.classList.remove('active')
+        brush.classList.remove('active')
     }
     ctx.lineWidth = 2;
     pencil.onclick = function () {
         eraserEnable = false
         ctx.lineWidth = 2;
         myCanvas.setAttribute('class', 'pencil')
-        var canvasClassName = myCanvas.getAttribute('class')
         pencil.classList.add('active')
         pen.classList.remove('active')
         brush.classList.remove('active')
@@ -53,7 +64,6 @@ function listenOptions() {
         eraserEnable = false
         ctx.lineWidth = 4;
         myCanvas.setAttribute('class', 'pen')
-        var canvasClassName = myCanvas.getAttribute('class')
         pen.classList.add('active')
         pencil.classList.remove('active')
         brush.classList.remove('active')
@@ -63,25 +73,18 @@ function listenOptions() {
         eraserEnable = false
         ctx.lineWidth = 6;
         myCanvas.setAttribute('class', 'brush')
-        var canvasClassName = myCanvas.getAttribute('class')
         brush.classList.add('active')
         pen.classList.remove('active')
         pencil.classList.remove('active')
         eraser.classList.remove('active')
     }
-
-    var optionItems = false
-    options.onclick = function () {
-        optionItems = !optionItems
-        if (optionItems) {
-            wrapper.classList.add('active')
-            brushWrapper.classList.remove('active')
-        } else {
-            wrapper.classList.remove('active')
-        }
-    }
     clear.onclick = function () {
         ctx.clearRect(0, 0, c.width, c.height)
+    }
+    reset.onclick= function(){
+        ctx.clearRect(0, 0, c.width, c.height)
+        c.style.background = "#ffffff"
+        ctx.strokeStyle = "#111111"
     }
     save.onclick = function () {
         var url = c.toDataURL("./image/png")
@@ -169,8 +172,8 @@ function listenEvent() {
 }
 //划线函数
 function drawLine(x1, y1, x2, y2) {
-    ctx.strokeStyle = brushColor.value;
     ctx.beginPath();
+    ctx.strokeStyle= brushColor.value;
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();

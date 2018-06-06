@@ -11,6 +11,7 @@ ul {
 body {
     height: 100vh;
     overflow: hidden;
+    font-size: 14px;
 }
 canvas {
     display: block;
@@ -28,107 +29,131 @@ canvas {
 .eraser{
 	cursor: url("./imgs/eraser.png"), default;
 }
-
-.actions {
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    text-align: center;
-    cursor: pointer;
-}
-.actions div {
-    width: 70px;
-    height: 45px;
-    line-height: 45px;
-    background: #ddd;
-    color: #000;
-    margin:5px 0;
-    border-radius: 10px;
-}
-button{
-    width: 70px;
-    height: 45px;
-    line-height: 45px;
-    background: #ddd;
-    color: #000;
-    border: none;
-    border-radius: 10px;
-    outline: none;
-    cursor: pointer;
-    margin-bottom: 5px;
-    float:left;
-}
-.clearfix::after{
-    content: '';
-    display: block;
-    clear: both;
-}
-
 /* display */
-.wrapper{
-    display: none;
-}
 .bgColor{
     display: none;
 }
 .brushColor{
     display: none;
 }
-.brushWrapper{
-    display: none;
+/* 布局和动画 */
+:root {
+	--time-slot-length: 100ms;
+	--t1x: var(--time-slot-length);
+	--t2x: calc(var(--time-slot-length) * 2);
+	--t3x: calc(var(--time-slot-length) * 3);
+	--t4x: calc(var(--time-slot-length) * 4);
+	--color: dodgerblue;
 }
-/* active */
-.wrapper.active{
-    display: block;
-    border-radius: 8px;
-    background: transparent;
-}
-.pencil.active{
-    background: #e66666;
-}
-.pen.active{
-    background: #e66666;
-}
-.brush.active{
-    background: #e66666;
-}
-.eraser.active{
-    background: #e66666;
-}
-.chooseBrush.active{
-    background: #111;
-    color: #fff;
-}
-.brushWrapper.active{
-    display: block;
+.actions {
     position: fixed;
-    left:90px;
-    top:100px;
-    background: transparent;
-    border-radius: 8px;
+	top:0.1em;
+	left: 0.1em;
+    background: #000;
+    text-align: center;
+	cursor: pointer;
 }
-/*设置hover样式*/
-.options:hover{
-    background: #222;
-    color: azure;
+button{
+	outline:none;
+	background: #000;
+	display:block;
+	color: white;
+	font-family: sans-serif;
+	width: 70px;
+	height: 2.5em;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 0.1em;
+	text-align: center;
+	line-height: 2.5em;
+	letter-spacing: 0.1em;
+	position: relative;
+	transition: var(--t4x); /* duration 4x */
+	margin: 0.5em;
 }
-.bgBtn:hover{
-    color:#fff;
-    background: #222;
+.actions>div {
+	color: white;
+	list-style-type: none;
+	font-family: sans-serif;
+	text-transform: uppercase;
+	width: 5em;
+	height: 2.5em;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 0.1em;
+	text-align: center;
+	line-height: 2.5em;
+	letter-spacing: 0.1em;
+	position: relative;
+	transition: var(--t4x); /* duration 4x */
+	margin: 0.5em;
 }
-.chooseBrush:hover{
-    color:#fff;
-    background: #222;
+button:hover,
+.actions>div:hover {
+	color: var(--color);
+	animation: pulse ease-out 1s var(--t4x); /* delay 4x */
 }
-.brushColorBtn:hover{
-    color:#fff;
-    background: #222; 
+button::before,
+button::after,
+.actions>div::before,
+.actions>div::after {
+	content: '';
+	position: absolute;;
+	width: 0;
+	height: 0;
+	border-radius: 0.1em;
+	visibility: hidden;
 }
-.clear:hover{
-    color:#fff;
-    background: #222; 
+button::before,
+.actions>div::before {
+	top: 0;
+	left: 0;
+	border-top: 1px solid var(--color);
+	border-right: 1px solid var(--color);
+	transition:
+		height linear var(--t1x) var(--t2x), /* delay 2x */
+		width linear var(--t1x) var(--t3x), /* delay 3x */
+		visibility 0s var(--t4x); /* delay 4x */
 }
-.save:hover{
-    color:#fff;
-    background: #222; 
+button::after,
+.actions>div::after {
+	bottom: 0;
+	right: 0;
+	border-bottom: 1px solid var(--color);
+	border-left: 1px solid var(--color);
+	transition:
+		height linear var(--t1x),
+		width linear var(--t1x) var(--t1x), /* delay 1x */
+		visibility 0s var(--t2x);  /* delay 2x */
+}
+button:hover::before,
+button:hover::after,
+.actions>div:hover::before,
+.actions>div:hover::after {
+	width: 100%;
+	height: 100%;
+	visibility: visible;
+}
+button:hover::before,
+.actions>div:hover::before {
+	transition:
+		visibility 0s,
+		width linear var(--t1x),
+		height linear var(--t1x) var(--t1x); /* delay 1x */
+}
+button:hover::after,
+.actions>div:hover::after {
+	transition: 
+		visibility 0s var(--t2x), /* delay 2x */
+		width linear var(--t1x) var(--t2x), /* delay 2x */
+		height linear var(--t1x) var(--t3x); /* delay 3x */
+}
+
+@keyframes pulse {
+	from {
+		/* rgb(30, 144, 255) = dodgerblue */
+		box-shadow: 0 0 rgba(30, 144, 255, 0.5);
+	}
+
+	to {
+		box-shadow: 0 0 0 1em rgba(30, 144, 255, 0);
+	}
 }
