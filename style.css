@@ -49,18 +49,18 @@ canvas {
     position: fixed;
 	top:0.1em;
 	left: 0.1em;
-    background: #000;
+    background: rgba(0, 0, 0, 0.8);
     text-align: center;
 	cursor: pointer;
 }
 button{
 	outline:none;
-	background: #000;
+	background: transparent;
 	display:block;
 	color: white;
 	font-family: sans-serif;
 	width: 70px;
-	height: 2.5em;
+	height: 35px;;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 0.1em;
 	text-align: center;
