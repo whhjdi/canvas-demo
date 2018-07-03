@@ -84,7 +84,7 @@ function listenOptions() {
     reset.onclick= function(){
         ctx.clearRect(0, 0, c.width, c.height)
         c.style.background = "#ffffff"
-        ctx.strokeStyle = "#111111"
+        brushColor.value = "#111111"
     }
     save.onclick = function () {
         var url = c.toDataURL("./image/png")
