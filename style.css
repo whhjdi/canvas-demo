@@ -11,7 +11,7 @@ ul {
 body {
     height: 100vh;
     overflow: hidden;
-    font-size: 14px;
+	font-size: 14px;
 }
 canvas {
     display: block;

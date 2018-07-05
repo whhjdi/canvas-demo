@@ -1,5 +1,7 @@
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
+ctx.fillStyle = bgColor.value;
+ctx.fillRect(0, 0, c.width, c.height);
 autoSetCanvas(c)
 listenEvent()
 listenOptions()
@@ -34,10 +36,23 @@ function listenOptions() {
         } 
     }
     bgBtn.onclick = function () {
-        bgColor.click();
+        if(drawStart){
+            var name = prompt(`
+        实验性功能:
+            更改画布背景会覆盖掉您之前的创作,您希望继续吗?
+            y(继续),n(返回)`)
+            if(name === 'y'){
+                bgColor.click();
+            }
+        }else{
+            bgColor.click();
+        }
+        
+          
     };
     bgColor.onchange = function () {
-        c.style.background = this.value;
+        ctx.fillStyle = bgColor.value;
+        ctx.fillRect(0, 0, c.width, c.height);
     };
     brushColorBtn.onclick = function () {
         brushColor.click();
@@ -79,11 +94,17 @@ function listenOptions() {
         eraser.classList.remove('active')
     }
     clear.onclick = function () {
+        drawStart = false
         ctx.clearRect(0, 0, c.width, c.height)
+        ctx.fillStyle = bgColor.value;
+        ctx.fillRect(0, 0, c.width, c.height);
     }
     reset.onclick= function(){
+        drawStart = false
         ctx.clearRect(0, 0, c.width, c.height)
-        c.style.background = "#ffffff"
+        bgColor.value= '#ffffff'
+        ctx.fillStyle = bgColor.value;
+        ctx.fillRect(0, 0, c.width, c.height);
         brushColor.value = "#111111"
     }
     save.onclick = function () {
@@ -171,7 +192,9 @@ function listenEvent() {
     }
 }
 //划线函数
+var drawStart = false
 function drawLine(x1, y1, x2, y2) {
+    drawStart = true
     ctx.beginPath();
     ctx.strokeStyle= brushColor.value;
     ctx.moveTo(x1, y1);
